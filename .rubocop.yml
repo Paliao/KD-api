@@ -13,4 +13,6 @@ AllCops:
     - !ruby/regexp /old_and_unused\.rb$/
     - 'bin/*'
     - 'Gemfile'
-    - 'spec/**'
+    - 'spec/**/*'
+Style/SymbolArray:
+  Enabled: false
