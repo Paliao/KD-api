@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221002120) do
+ActiveRecord::Schema.define(version: 20171221020706) do
 
   create_table "advertises", force: :cascade do |t|
     t.string "name"
     t.integer "price"
-    t.float "rating"
+    t.float "rating", default: 0.0
     t.boolean "disponibility"
     t.string "description"
+    t.integer "rating_count", default: 0
     t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -41,9 +42,20 @@ ActiveRecord::Schema.define(version: 20171221002120) do
     t.string "address"
     t.integer "latitude"
     t.integer "longitude"
-    t.float "rating"
+    t.float "rating", default: 0.0
+    t.integer "rating_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "avaliation"
+    t.integer "advertise_id"
+    t.integer "establishment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["advertise_id"], name: "index_ratings_on_advertise_id"
+    t.index ["establishment_id"], name: "index_ratings_on_establishment_id"
   end
 
   create_table "users", force: :cascade do |t|
