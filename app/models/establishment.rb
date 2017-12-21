@@ -1,9 +1,9 @@
 class Establishment < ApplicationRecord
   after_initialize :init
 
-  has_many :days, dependent: :destroy
-  has_many :advertises, dependent: :destroy
-  has_many :ratings, dependent: :destroy
+  has_many :days, dependent: :delete_all
+  has_many :advertises, dependent: :delete_all
+  has_many :ratings, dependent: :delete_all
 
   def init
     self.rating_count ||= 0
