@@ -7,6 +7,7 @@ end
 
 gem 'cancancan', '~> 2.0'
 gem 'devise'
+gem 'devise_token_auth'
 gem 'omniauth-facebook'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.4'
