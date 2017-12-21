@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220212948) do
+ActiveRecord::Schema.define(version: 20171221002120) do
+
+  create_table "advertises", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.float "rating"
+    t.boolean "disponibility"
+    t.string "description"
+    t.integer "establishment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_advertises_on_establishment_id"
+  end
 
   create_table "days", force: :cascade do |t|
     t.string "day"
@@ -18,8 +30,10 @@ ActiveRecord::Schema.define(version: 20171220212948) do
     t.time "open_hour"
     t.time "closure_hour"
     t.boolean "special"
+    t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_days_on_establishment_id"
   end
 
   create_table "establishments", force: :cascade do |t|
