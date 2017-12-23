@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   after_initialize :init
 
   belongs_to :establishment
+  belongs_to :category
   belongs_to :combo, optional: true
   # belongs_to :event, optional: true
 

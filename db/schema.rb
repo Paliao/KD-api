@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171223191907) do
+ActiveRecord::Schema.define(version: 20171223211357) do
 
   create_table "advertises", force: :cascade do |t|
     t.string "name"
@@ -20,9 +20,19 @@ ActiveRecord::Schema.define(version: 20171223191907) do
     t.string "description"
     t.integer "rating_count", default: 0
     t.integer "establishment_id"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_advertises_on_category_id"
     t.index ["establishment_id"], name: "index_advertises_on_establishment_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "combos", force: :cascade do |t|
@@ -31,8 +41,10 @@ ActiveRecord::Schema.define(version: 20171223191907) do
     t.string "category"
     t.integer "day_id"
     t.integer "establishment_id"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_combos_on_category_id"
     t.index ["day_id"], name: "index_combos_on_day_id"
     t.index ["establishment_id"], name: "index_combos_on_establishment_id"
   end
@@ -57,8 +69,10 @@ ActiveRecord::Schema.define(version: 20171223191907) do
     t.integer "longitude"
     t.float "rating", default: 0.0
     t.integer "rating_count", default: 0
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_establishments_on_category_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -69,8 +83,10 @@ ActiveRecord::Schema.define(version: 20171223191907) do
     t.integer "quantity"
     t.integer "establishment_id"
     t.integer "combo_id"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["combo_id"], name: "index_products_on_combo_id"
     t.index ["establishment_id"], name: "index_products_on_establishment_id"
   end
