@@ -5,6 +5,7 @@ class Establishment < ApplicationRecord
   has_many :advertises, dependent: :delete_all
   has_many :ratings, dependent: :delete_all
   has_many :products, dependent: :delete_all
+  has_many :combos, dependent: :delete_all
 
   def init
     self.rating_count ||= 0

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171223160614) do
+ActiveRecord::Schema.define(version: 20171223191907) do
 
   create_table "advertises", force: :cascade do |t|
     t.string "name"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20171223160614) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["establishment_id"], name: "index_advertises_on_establishment_id"
+  end
+
+  create_table "combos", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.string "category"
+    t.integer "day_id"
+    t.integer "establishment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["day_id"], name: "index_combos_on_day_id"
+    t.index ["establishment_id"], name: "index_combos_on_establishment_id"
   end
 
   create_table "days", force: :cascade do |t|
@@ -57,12 +69,10 @@ ActiveRecord::Schema.define(version: 20171223160614) do
     t.integer "quantity"
     t.integer "establishment_id"
     t.integer "combo_id"
-    t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["combo_id"], name: "index_products_on_combo_id"
     t.index ["establishment_id"], name: "index_products_on_establishment_id"
-    t.index ["event_id"], name: "index_products_on_event_id"
   end
 
   create_table "ratings", force: :cascade do |t|
