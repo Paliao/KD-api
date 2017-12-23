@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration[5.1]
       t.integer :price
       t.string :description
       t.string :category
+      t.integer :quantity
       t.references :establishment, foreign_key: true
       t.references :combo, foreign_key: true
       t.references :event, foreign_key: true

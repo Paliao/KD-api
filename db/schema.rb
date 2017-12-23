@@ -27,10 +27,9 @@ ActiveRecord::Schema.define(version: 20171223160614) do
 
   create_table "days", force: :cascade do |t|
     t.string "day"
-    t.boolean "oppened"
-    t.time "open_hour"
-    t.time "closure_hour"
-    t.boolean "special"
+    t.boolean "available"
+    t.time "available_hour"
+    t.time "unavailable_hour"
     t.integer "establishment_id"
     t.integer "product_id"
     t.datetime "created_at", null: false
@@ -55,6 +54,7 @@ ActiveRecord::Schema.define(version: 20171223160614) do
     t.integer "price"
     t.string "description"
     t.string "category"
+    t.integer "quantity"
     t.integer "establishment_id"
     t.integer "combo_id"
     t.integer "event_id"
