@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221020706) do
+ActiveRecord::Schema.define(version: 20171223191907) do
 
   create_table "advertises", force: :cascade do |t|
     t.string "name"
@@ -25,16 +25,29 @@ ActiveRecord::Schema.define(version: 20171221020706) do
     t.index ["establishment_id"], name: "index_advertises_on_establishment_id"
   end
 
-  create_table "days", force: :cascade do |t|
-    t.string "day"
-    t.boolean "oppened"
-    t.time "open_hour"
-    t.time "closure_hour"
-    t.boolean "special"
+  create_table "combos", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.string "category"
+    t.integer "day_id"
     t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["day_id"], name: "index_combos_on_day_id"
+    t.index ["establishment_id"], name: "index_combos_on_establishment_id"
+  end
+
+  create_table "days", force: :cascade do |t|
+    t.string "day"
+    t.boolean "available"
+    t.time "available_hour"
+    t.time "unavailable_hour"
+    t.integer "establishment_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["establishment_id"], name: "index_days_on_establishment_id"
+    t.index ["product_id"], name: "index_days_on_product_id"
   end
 
   create_table "establishments", force: :cascade do |t|
@@ -46,6 +59,20 @@ ActiveRecord::Schema.define(version: 20171221020706) do
     t.integer "rating_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.string "description"
+    t.string "category"
+    t.integer "quantity"
+    t.integer "establishment_id"
+    t.integer "combo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["combo_id"], name: "index_products_on_combo_id"
+    t.index ["establishment_id"], name: "index_products_on_establishment_id"
   end
 
   create_table "ratings", force: :cascade do |t|
