@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221020706) do
+ActiveRecord::Schema.define(version: 20171223160614) do
 
   create_table "advertises", force: :cascade do |t|
     t.string "name"
@@ -23,6 +23,19 @@ ActiveRecord::Schema.define(version: 20171221020706) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["establishment_id"], name: "index_advertises_on_establishment_id"
+  end
+
+  create_table "archives", force: :cascade do |t|
+    t.integer "establishment_id"
+    t.integer "advertises_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["advertises_id"], name: "index_archives_on_advertises_id"
+    t.index ["establishment_id"], name: "index_archives_on_establishment_id"
   end
 
   create_table "days", force: :cascade do |t|
@@ -46,6 +59,21 @@ ActiveRecord::Schema.define(version: 20171221020706) do
     t.integer "rating_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.string "description"
+    t.string "category"
+    t.integer "establishment_id"
+    t.integer "combo_id"
+    t.integer "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["combo_id"], name: "index_products_on_combo_id"
+    t.index ["establishment_id"], name: "index_products_on_establishment_id"
+    t.index ["event_id"], name: "index_products_on_event_id"
   end
 
   create_table "ratings", force: :cascade do |t|
