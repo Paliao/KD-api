@@ -25,19 +25,6 @@ ActiveRecord::Schema.define(version: 20171223160614) do
     t.index ["establishment_id"], name: "index_advertises_on_establishment_id"
   end
 
-  create_table "archives", force: :cascade do |t|
-    t.integer "establishment_id"
-    t.integer "advertises_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
-    t.index ["advertises_id"], name: "index_archives_on_advertises_id"
-    t.index ["establishment_id"], name: "index_archives_on_establishment_id"
-  end
-
   create_table "days", force: :cascade do |t|
     t.string "day"
     t.boolean "oppened"
@@ -45,9 +32,11 @@ ActiveRecord::Schema.define(version: 20171223160614) do
     t.time "closure_hour"
     t.boolean "special"
     t.integer "establishment_id"
+    t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["establishment_id"], name: "index_days_on_establishment_id"
+    t.index ["product_id"], name: "index_days_on_product_id"
   end
 
   create_table "establishments", force: :cascade do |t|
