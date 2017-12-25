@@ -1,6 +1,4 @@
 class Product < ApplicationRecord
-  after_initialize :init
-
   belongs_to :establishment
   belongs_to :category
   belongs_to :combo, optional: true
@@ -10,9 +8,6 @@ class Product < ApplicationRecord
 
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
-
-  def init
-    self.price ||= 0
-    self.quantity ||= 0
-  end
+  validates :rating, numericality: { greater_than_or_equal_to: 0 }
+  validates :rating_count, numericality: { greater_than_or_equal_to: 0 }
 end

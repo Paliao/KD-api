@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20171223211357) do
   create_table "combos", force: :cascade do |t|
     t.string "name"
     t.integer "price"
+    t.float "rating", default: 0.0
+    t.integer "rating_count", default: 0
     t.integer "day_id"
     t.integer "establishment_id"
     t.integer "category_id"
@@ -79,6 +81,8 @@ ActiveRecord::Schema.define(version: 20171223211357) do
     t.integer "price"
     t.string "description"
     t.integer "quantity"
+    t.integer "rating", default: 0
+    t.integer "rating_count", default: 0
     t.integer "establishment_id"
     t.integer "combo_id"
     t.integer "category_id"

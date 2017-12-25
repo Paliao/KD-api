@@ -1,5 +1,7 @@
 class Rating < ApplicationRecord
   belongs_to :advertise, optional: true
+  belongs_to :product, optional: true
+  belongs_to :combo, optional: true
   belongs_to :establishment
 
   validates :avaliation, numericality: {
