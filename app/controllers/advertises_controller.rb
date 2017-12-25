@@ -41,7 +41,8 @@ class AdvertisesController < ApplicationController
 
   def advertise_params
     params.require(:advertise).permit(
-      :name, :price, :disponibility, :description, :establishment_id
+      :name, :price, :disponibility, :description,
+      :category_id, :establishment_id
     )
   end
 end

@@ -1,7 +1,7 @@
 class Establishment < ApplicationRecord
   after_initialize :init
 
-  belongs_to :category  
+  belongs_to :category
 
   has_many :days, dependent: :delete_all
   has_many :advertises, dependent: :delete_all

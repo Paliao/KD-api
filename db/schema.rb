@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20171223211357) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "type"
+    t.string "category_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20171223211357) do
   create_table "combos", force: :cascade do |t|
     t.string "name"
     t.integer "price"
-    t.string "category"
     t.integer "day_id"
     t.integer "establishment_id"
     t.integer "category_id"
@@ -79,7 +78,6 @@ ActiveRecord::Schema.define(version: 20171223211357) do
     t.string "name"
     t.integer "price"
     t.string "description"
-    t.string "category"
     t.integer "quantity"
     t.integer "establishment_id"
     t.integer "combo_id"
