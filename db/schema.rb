@@ -78,6 +78,9 @@ ActiveRecord::Schema.define(version: 20180101162042) do
 
   create_table "events", force: :cascade do |t|
     t.string "description"
+    t.integer "price", default: 0
+    t.float "rating", default: 0.0
+    t.integer "rating_count", default: 0
     t.integer "establishment_id"
     t.integer "day_id"
     t.datetime "created_at", null: false
@@ -96,11 +99,13 @@ ActiveRecord::Schema.define(version: 20180101162042) do
     t.integer "establishment_id"
     t.integer "combo_id"
     t.integer "category_id"
+    t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["combo_id"], name: "index_products_on_combo_id"
     t.index ["establishment_id"], name: "index_products_on_establishment_id"
+    t.index ["event_id"], name: "index_products_on_event_id"
   end
 
   create_table "ratings", force: :cascade do |t|

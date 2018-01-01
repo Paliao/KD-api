@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   belongs_to :establishment
   belongs_to :category
   belongs_to :combo, optional: true
-  # belongs_to :event, optional: true
+  belongs_to :event, optional: true
 
   has_many :days, dependent: :delete_all
 
