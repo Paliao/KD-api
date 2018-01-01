@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   resources :categories
   resources :combos
   resources :products

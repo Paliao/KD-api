@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171223211357) do
+ActiveRecord::Schema.define(version: 20180101162042) do
 
   create_table "advertises", force: :cascade do |t|
     t.string "name"
@@ -76,12 +76,22 @@ ActiveRecord::Schema.define(version: 20171223211357) do
     t.index ["category_id"], name: "index_establishments_on_category_id"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "description"
+    t.integer "establishment_id"
+    t.integer "day_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["day_id"], name: "index_events_on_day_id"
+    t.index ["establishment_id"], name: "index_events_on_establishment_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.integer "price"
+    t.integer "price", default: 0
     t.string "description"
-    t.integer "quantity"
-    t.integer "rating", default: 0
+    t.integer "quantity", default: 0
+    t.float "rating", default: 0.0
     t.integer "rating_count", default: 0
     t.integer "establishment_id"
     t.integer "combo_id"
