@@ -100,8 +100,10 @@ ActiveRecord::Schema.define(version: 20180101162042) do
     t.integer "combo_id"
     t.integer "category_id"
     t.integer "event_id"
+    t.integer "advertise_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["advertise_id"], name: "index_products_on_advertise_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["combo_id"], name: "index_products_on_combo_id"
     t.index ["establishment_id"], name: "index_products_on_establishment_id"
@@ -111,11 +113,17 @@ ActiveRecord::Schema.define(version: 20180101162042) do
   create_table "ratings", force: :cascade do |t|
     t.integer "avaliation"
     t.integer "advertise_id"
+    t.integer "product_id"
+    t.integer "combo_id"
+    t.integer "event_id"
     t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["advertise_id"], name: "index_ratings_on_advertise_id"
+    t.index ["combo_id"], name: "index_ratings_on_combo_id"
     t.index ["establishment_id"], name: "index_ratings_on_establishment_id"
+    t.index ["event_id"], name: "index_ratings_on_event_id"
+    t.index ["product_id"], name: "index_ratings_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|

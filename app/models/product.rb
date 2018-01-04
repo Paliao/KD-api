@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  belongs_to :advertise, optional: true
   belongs_to :establishment
   belongs_to :category
   belongs_to :combo, optional: true
