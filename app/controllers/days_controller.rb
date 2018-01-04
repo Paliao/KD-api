@@ -41,7 +41,8 @@ class DaysController < ApplicationController
 
   def day_params
     params.require(:day).permit(
-      :day, :available, :available_hour, :unavailable_hour, :establishment_id
+      :day, :available, :available_hour, :unavailable_hour,
+      :establishment_id, :product_id
     )
   end
 end

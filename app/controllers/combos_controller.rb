@@ -43,7 +43,7 @@ class CombosController < ApplicationController
     params.require(:combo).permit(
       :name, :price,
       :category_id,
-      :day_id, :establishment_id, product_ids: []
+      :day_id, :establishment_id
     )
   end
 end
