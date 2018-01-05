@@ -83,8 +83,10 @@ ActiveRecord::Schema.define(version: 20180101162042) do
     t.integer "rating_count", default: 0
     t.integer "establishment_id"
     t.integer "day_id"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_events_on_category_id"
     t.index ["day_id"], name: "index_events_on_day_id"
     t.index ["establishment_id"], name: "index_events_on_establishment_id"
   end
