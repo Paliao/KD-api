@@ -16,3 +16,5 @@ AllCops:
     - 'spec/**/*'
 Style/SymbolArray:
   Enabled: false
+Metrics/MethodLength:
+  Max: 15
