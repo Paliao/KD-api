@@ -42,22 +42,9 @@ class RatingsController < ApplicationController
     @rating = Rating.find(params[:id])
   end
 
-  def rating_params
-    params.require(:rating).permit(
-      :avaliation, :advertise_id, :combo_id,
-      :establishment_id, :event_id, :product
-    )
-  end
-
   def ratings_treatment
-    advertise_id = @rating.advertise_id
-    if advertise_id.present?
-      advertise = Advertise.find(advertise_id)
-      rating_average(advertise)
-    else
-      establishment = Establishment.find(@rating.establishment_id)
-      rating_average(establishment)
-    end
+    chosed_model = rating_model_chooser(@rating)
+    rating_average(chosed_model)
   end
 
   def rating_average(model)
@@ -70,15 +57,9 @@ class RatingsController < ApplicationController
   end
 
   def remove_old_rating
-    advertise_id = @rating.advertise_id
     old_rating = @rating.avaliation
-    if advertise_id.present?
-      advertise = Advertise.find(advertise_id)
-      delete_previous_rating(advertise, old_rating)
-    else
-      establishment = Establishment.find(@rating.establishment_id)
-      delete_previous_rating(establishment, old_rating)
-    end
+    chosed_model = rating_model_chooser(@rating)
+    delete_previous_rating(chosed_model, old_rating)
   end
 
   def delete_previous_rating(model, old_rating)
@@ -88,5 +69,26 @@ class RatingsController < ApplicationController
     aggregated /= model.rating_count unless model.rating_count.zero?
     model.rating = aggregated
     model.save!
+  end
+
+  def rating_model_chooser(rating)
+    if rating.advertise_id
+      Advertise.find(rating.advertise_id)
+    elsif rating.combo_id
+      Combo.find(rating.combo_id)
+    elsif rating.event_id
+      Event.find(rating.event_id)
+    elsif rating.product_id
+      Product.find(rating.product_id)
+    else
+      Establishment.find(rating.establishment_id)
+    end
+  end
+
+  def rating_params
+    params.require(:rating).permit(
+      :avaliation, :advertise_id, :combo_id,
+      :establishment_id, :event_id, :product_id
+    )
   end
 end
