@@ -43,9 +43,11 @@ ActiveRecord::Schema.define(version: 20180101162042) do
     t.integer "day_id"
     t.integer "establishment_id"
     t.integer "category_id"
+    t.integer "combo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_combos_on_category_id"
+    t.index ["combo_id"], name: "index_combos_on_combo_id"
     t.index ["day_id"], name: "index_combos_on_day_id"
     t.index ["establishment_id"], name: "index_combos_on_establishment_id"
   end

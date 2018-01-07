@@ -2,6 +2,7 @@ class Combo < ApplicationRecord
   belongs_to :category
   belongs_to :day
   belongs_to :establishment
+  belongs_to :advertise, optional: true
 
   has_many :events, dependent: :delete_all
   has_many :products, dependent: :delete_all
