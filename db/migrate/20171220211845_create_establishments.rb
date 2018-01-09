@@ -2,7 +2,9 @@ class CreateEstablishments < ActiveRecord::Migration[5.1]
   def change
     create_table :establishments do |t|
       t.string :name
-      t.string :address
+      t.string :street
+      t.integer :number
+      t.string :complement
       t.integer :latitude
       t.integer :longitude
       t.float :rating, default: 0.0

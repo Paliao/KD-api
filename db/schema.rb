@@ -67,7 +67,9 @@ ActiveRecord::Schema.define(version: 20180101162042) do
 
   create_table "establishments", force: :cascade do |t|
     t.string "name"
-    t.string "address"
+    t.string "street"
+    t.integer "number"
+    t.string "complement"
     t.integer "latitude"
     t.integer "longitude"
     t.float "rating", default: 0.0
