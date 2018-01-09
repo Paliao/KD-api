@@ -43,46 +43,14 @@ class RatingsController < ApplicationController
   end
 
   def ratings_treatment
-    chosed_model = rating_model_chooser(@rating)
-    rating_average(chosed_model)
-  end
-
-  def rating_average(model)
-    new_rating = model.rating * model.rating_count
-    model.rating_count += 1
-    new_rating += @rating.avaliation
-    new_rating /= model.rating_count
-    model.rating = new_rating
-    model.save!
+    chosed_model = Rating.rating_model_chooser(@rating)
+    Rating.rating_average(chosed_model, @rating)
   end
 
   def remove_old_rating
     old_rating = @rating.avaliation
-    chosed_model = rating_model_chooser(@rating)
-    delete_previous_rating(chosed_model, old_rating)
-  end
-
-  def delete_previous_rating(model, old_rating)
-    aggregated = model.rating * model.rating_count
-    aggregated -= old_rating
-    model.rating_count -= 1
-    aggregated /= model.rating_count unless model.rating_count.zero?
-    model.rating = aggregated
-    model.save!
-  end
-
-  def rating_model_chooser(rating)
-    if rating.advertise_id
-      Advertise.find(rating.advertise_id)
-    elsif rating.combo_id
-      Combo.find(rating.combo_id)
-    elsif rating.event_id
-      Event.find(rating.event_id)
-    elsif rating.product_id
-      Product.find(rating.product_id)
-    else
-      Establishment.find(rating.establishment_id)
-    end
+    chosed_model = Rating.rating_model_chooser(@rating)
+    Rating.delete_previous_rating(chosed_model, old_rating)
   end
 
   def rating_params
