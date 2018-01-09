@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180101162042) do
+ActiveRecord::Schema.define(version: 20180109013848) do
 
   create_table "advertises", force: :cascade do |t|
     t.string "name"
@@ -52,9 +52,18 @@ ActiveRecord::Schema.define(version: 20180101162042) do
     t.index ["establishment_id"], name: "index_combos_on_establishment_id"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.integer "phone"
+    t.boolean "cellphone"
+    t.integer "establishment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_contacts_on_establishment_id"
+  end
+
   create_table "days", force: :cascade do |t|
     t.string "day"
-    t.boolean "available"
+    t.boolean "available", default: false
     t.time "available_hour"
     t.time "unavailable_hour"
     t.integer "establishment_id"
