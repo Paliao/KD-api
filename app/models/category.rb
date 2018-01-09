@@ -5,5 +5,9 @@ class Category < ApplicationRecord
   has_many :events, dependent: :delete_all
   has_many :products, dependent: :delete_all
 
-  validates :description, :category_type, :name, presence: true
+  validates :description, :name, presence: true
+  validates :category_type, inclusion: {
+    in: %w[Advertise Combo Establishment Events Products],
+    message: '%<value>s is not a valid model'
+  }
 end
