@@ -25,6 +25,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'meta_request'
   gem 'pry-rails'
+  gem 'rails-erd', require: false
   gem 'rspec-rails', '~> 3.6'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

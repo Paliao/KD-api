@@ -16,5 +16,6 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+erd.pdf
 
 .byebug_history
