@@ -111,10 +111,11 @@ ActiveRecord::Schema.define(version: 20180109024021) do
     t.time "open_hour"
     t.time "closure_hour"
     t.integer "hour_price"
+    t.boolean "free"
     t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["establishment_id"], name: "index_parkings_on_establishment_id"
+    t.index ["establishment_id"], name: "index_parkings_on_establishment_id", unique: true
   end
 
   create_table "products", force: :cascade do |t|

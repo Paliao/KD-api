@@ -6,7 +6,6 @@ class Establishment < ApplicationRecord
   has_many :contacts, dependent: :delete_all
   has_many :days, dependent: :delete_all
   has_many :events, dependent: :delete_all
-  has_one :parking, dependent: :delete_all
   has_many :products, dependent: :delete_all
   has_many :ratings, dependent: :delete_all
 

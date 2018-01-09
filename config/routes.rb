@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
-  resources :parkings
-  resources :contacts
-  resources :events
+  resources :advertises
   resources :categories
   resources :combos
-  resources :products
-  resources :ratings
-  resources :advertises
+  resources :contacts
   resources :days
   resources :establishments
+  resources :events
+  resources :parkings
+  resources :products
+  resources :ratings
   mount_devise_token_auth_for 'User', at: 'auth'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
