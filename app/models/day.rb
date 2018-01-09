@@ -2,10 +2,11 @@ class Day < ApplicationRecord
   after_initialize :init
 
   belongs_to :establishment
-  belongs_to :product, optional: true
 
   has_many :combos, dependent: :delete_all
   has_many :events, dependent: :delete_all
+  has_many :menus
+  has_many :products, through: :menus, dependent: :nullify
 
   validates :day, inclusion: {
     in: %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday],

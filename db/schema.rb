@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180109024021) do
+ActiveRecord::Schema.define(version: 20180109055516) do
 
   create_table "advertises", force: :cascade do |t|
     t.string "name"
@@ -67,11 +67,9 @@ ActiveRecord::Schema.define(version: 20180109024021) do
     t.time "available_hour"
     t.time "unavailable_hour"
     t.integer "establishment_id"
-    t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["establishment_id"], name: "index_days_on_establishment_id"
-    t.index ["product_id"], name: "index_days_on_product_id"
   end
 
   create_table "establishments", force: :cascade do |t|
@@ -104,6 +102,15 @@ ActiveRecord::Schema.define(version: 20180109024021) do
     t.index ["category_id"], name: "index_events_on_category_id"
     t.index ["day_id"], name: "index_events_on_day_id"
     t.index ["establishment_id"], name: "index_events_on_establishment_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.integer "day_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["day_id"], name: "index_menus_on_day_id"
+    t.index ["product_id"], name: "index_menus_on_product_id"
   end
 
   create_table "parkings", force: :cascade do |t|
