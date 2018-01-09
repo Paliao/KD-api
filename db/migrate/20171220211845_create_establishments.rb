@@ -7,6 +7,9 @@ class CreateEstablishments < ActiveRecord::Migration[5.1]
       t.string :complement
       t.integer :latitude
       t.integer :longitude
+      t.integer :area
+      t.integer :capacity
+      t.boolean :parking_lot
       t.float :rating, default: 0.0
       t.integer :rating_count, default: 0
       t.references :category, foreign_key: true

@@ -8,6 +8,7 @@ class Establishment < ApplicationRecord
   has_many :products, dependent: :delete_all
   has_many :ratings, dependent: :delete_all
 
+  validates :name, :street, :number, :capacity, :parking_lot, presence: true
   validates :rating, numericality: { greater_than_or_equal_to: 0 }
   validates :rating_count, numericality: { greater_than_or_equal_to: 0 }
 end

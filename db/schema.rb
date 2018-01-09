@@ -72,6 +72,9 @@ ActiveRecord::Schema.define(version: 20180101162042) do
     t.string "complement"
     t.integer "latitude"
     t.integer "longitude"
+    t.integer "area"
+    t.integer "capacity"
+    t.boolean "parking_lot"
     t.float "rating", default: 0.0
     t.integer "rating_count", default: 0
     t.integer "category_id"
