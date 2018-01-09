@@ -2,7 +2,7 @@ class CreateDays < ActiveRecord::Migration[5.1]
   def change
     create_table :days do |t|
       t.string :day
-      t.boolean :available
+      t.boolean :available, default: false
       t.time :available_hour
       t.time :unavailable_hour
       t.references :establishment, foreign_key: true
