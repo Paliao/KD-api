@@ -107,8 +107,10 @@ ActiveRecord::Schema.define(version: 20180109055516) do
   create_table "menus", force: :cascade do |t|
     t.integer "day_id"
     t.integer "product_id"
+    t.integer "combo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["combo_id"], name: "index_menus_on_combo_id"
     t.index ["day_id"], name: "index_menus_on_day_id"
     t.index ["product_id"], name: "index_menus_on_product_id"
   end

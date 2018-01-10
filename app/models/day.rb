@@ -3,7 +3,7 @@ class Day < ApplicationRecord
 
   belongs_to :establishment
 
-  has_many :combos, dependent: :delete_all
+  has_many :combos, dependent: :nullify
   has_many :events, dependent: :delete_all
   has_many :menus, dependent: :delete_all
   has_many :products, through: :menus, dependent: :nullify

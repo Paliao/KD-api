@@ -3,6 +3,7 @@ class CreateMenus < ActiveRecord::Migration[5.1]
     create_table :menus do |t|
       t.belongs_to :day, index: true
       t.belongs_to :product, index: true
+      t.belongs_to :combo, index: true
       t.timestamps
     end
   end
