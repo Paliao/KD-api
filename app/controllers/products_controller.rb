@@ -43,7 +43,8 @@ class ProductsController < ApplicationController
     params.require(:product).permit(
       :name, :price, :description, :quantity,
       :category_id,
-      :establishment_id, :combo_id, :event_id
+      :establishment_id, :combo_id, :event_id,
+      day_ids: []
     )
   end
 end

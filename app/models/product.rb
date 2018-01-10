@@ -5,7 +5,7 @@ class Product < ApplicationRecord
   belongs_to :establishment
   belongs_to :event, optional: true
 
-  has_many :menus
+  has_many :menus, dependent: :delete_all
   has_many :days, through: :menus, dependent: :nullify
 
   validates :price, numericality: { greater_than_or_equal_to: 0 }
