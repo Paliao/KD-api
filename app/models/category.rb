@@ -7,7 +7,7 @@ class Category < ApplicationRecord
 
   validates :description, :name, presence: true
   validates :category_type, inclusion: {
-    in: %w[Advertise Combo Establishment Event Product],
+    in: %w[advertise combo establishment event product],
     message: '%<value>s is not a valid model'
   }
 

@@ -3,12 +3,12 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
-
-    render json: @categories
+    render json: @categories.as_json(include: [:advertises, :combos, :establishments, :events, :products])
   end
 
   def show
-    render json: @category
+    category_type = @category.category_type
+    render json: @category.as_json(include: [category_type])
   end
 
   def create
