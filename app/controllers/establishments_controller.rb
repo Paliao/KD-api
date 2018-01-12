@@ -14,7 +14,7 @@ class EstablishmentsController < ApplicationController
   def create
     @establishment = Establishment.new(establishment_params)
 
-    if @establishment.save
+    if @establishment.save && Category.category_checker(@establishment, 'Establishment')
       render json: @establishment, status: :created, location: @establishment
     else
       render json: @establishment.errors, status: :unprocessable_entity

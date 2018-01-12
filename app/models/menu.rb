@@ -5,5 +5,4 @@ class Menu < ApplicationRecord
   belongs_to :day, optional: true
   belongs_to :product
   belongs_to :combo, optional: true
-
 end

@@ -7,7 +7,15 @@ class Category < ApplicationRecord
 
   validates :description, :name, presence: true
   validates :category_type, inclusion: {
-    in: %w[Advertise Combo Establishment Events Products],
+    in: %w[Advertise Combo Establishment Event Product],
     message: '%<value>s is not a valid model'
   }
+
+  def self.category_checker(model, expected)
+    category_id = model.category_id
+    category = Category.find(category_id)
+    return true if category.category_type == expected
+    model.errors[:category] << ['This category is not for this type']
+    false
+  end
 end
