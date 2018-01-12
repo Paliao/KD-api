@@ -14,7 +14,7 @@ class AdvertisesController < ApplicationController
   def create
     @advertise = Advertise.new(advertise_params)
 
-    if @advertise.save
+    if @advertise.save && Category.category_checker(@advertise, 'Advertise')
       render json: @advertise, status: :created, location: @advertise
     else
       render json: @advertise.errors, status: :unprocessable_entity

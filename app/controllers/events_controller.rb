@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    if @event.save
+    if @event.save && Category.category_checker(@event, 'Event')
       render json: @event, status: :created, location: @event
     else
       render json: @event.errors, status: :unprocessable_entity

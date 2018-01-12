@@ -14,7 +14,7 @@ class CombosController < ApplicationController
   def create
     @combo = Combo.new(combo_params)
 
-    if @combo.save
+    if @combo.save && Category.category_checker(@combo, 'Combo')
       render json: @combo, status: :created, location: @combo
     else
       render json: @combo.errors, status: :unprocessable_entity

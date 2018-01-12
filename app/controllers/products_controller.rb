@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
 
-    if @product.save
+    if @product.save && Category.category_checker(@product, 'Product')
       render json: @product, status: :created, location: @product
     else
       render json: @product.errors, status: :unprocessable_entity
