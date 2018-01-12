@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20180109055516) do
     t.boolean "disponibility"
     t.string "description"
     t.integer "rating_count", default: 0
-    t.integer "establishment_id"
     t.integer "category_id"
+    t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_advertises_on_category_id"
@@ -40,10 +40,10 @@ ActiveRecord::Schema.define(version: 20180109055516) do
     t.integer "price"
     t.float "rating", default: 0.0
     t.integer "rating_count", default: 0
-    t.integer "day_id"
-    t.integer "establishment_id"
     t.integer "category_id"
     t.integer "combo_id"
+    t.integer "day_id"
+    t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_combos_on_category_id"
@@ -94,9 +94,9 @@ ActiveRecord::Schema.define(version: 20180109055516) do
     t.integer "price", default: 0
     t.float "rating", default: 0.0
     t.integer "rating_count", default: 0
-    t.integer "establishment_id"
-    t.integer "day_id"
     t.integer "category_id"
+    t.integer "day_id"
+    t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_events_on_category_id"
@@ -134,11 +134,11 @@ ActiveRecord::Schema.define(version: 20180109055516) do
     t.integer "quantity", default: 0
     t.float "rating", default: 0.0
     t.integer "rating_count", default: 0
-    t.integer "establishment_id"
-    t.integer "combo_id"
-    t.integer "category_id"
-    t.integer "event_id"
     t.integer "advertise_id"
+    t.integer "category_id"
+    t.integer "combo_id"
+    t.integer "establishment_id"
+    t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["advertise_id"], name: "index_products_on_advertise_id"

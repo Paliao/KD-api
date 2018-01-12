@@ -7,8 +7,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    category_type = @category.category_type
-    render json: @category.as_json(include: [category_type])
+    render json: @category.as_json(include: [:advertises, :combos, :establishments, :events, :products])
   end
 
   def create

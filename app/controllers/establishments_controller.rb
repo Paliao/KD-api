@@ -4,11 +4,11 @@ class EstablishmentsController < ApplicationController
   def index
     @establishments = Establishment.all
 
-    render json: @establishments
+    render json: @establishments.as_json(include: [:advertises, :combos, :contacts, :days, :events, :products, :ratings])
   end
 
   def show
-    render json: @establishment
+    render json: @establishment.as_json(include: [:advertises, :combos, :contacts, :days, :events, :products, :ratings])
   end
 
   def create
