@@ -22,7 +22,7 @@ class AdvertisesController < ApplicationController
   end
 
   def update
-    if @advertise.update(advertise_params)
+    if @advertise.update(advertise_params) && Category.category_checker(@advertise, 'Advertise')
       render json: @advertise
     else
       render json: @advertise.errors, status: :unprocessable_entity

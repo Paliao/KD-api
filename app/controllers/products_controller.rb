@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @product.update(product_params)
+    if @product.update(product_params) && Category.category_checker(@product, 'Product')
       render json: @product
     else
       render json: @product.errors, status: :unprocessable_entity

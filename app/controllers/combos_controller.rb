@@ -22,7 +22,7 @@ class CombosController < ApplicationController
   end
 
   def update
-    if @combo.update(combo_params)
+    if @combo.update(combo_params) && Category.category_checker(@combo, 'Combo')
       render json: @combo
     else
       render json: @combo.errors, status: :unprocessable_entity

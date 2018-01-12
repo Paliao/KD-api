@@ -22,7 +22,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    if @event.update(event_params)
+    if @event.update(event_params) && Category.category_checker(@event, 'Event')
       render json: @event
     else
       render json: @event.errors, status: :unprocessable_entity

@@ -22,7 +22,7 @@ class EstablishmentsController < ApplicationController
   end
 
   def update
-    if @establishment.update(establishment_params)
+    if @establishment.update(establishment_params) && Category.category_checker(@establishment, 'Establishment')
       render json: @establishment
     else
       render json: @establishment.errors, status: :unprocessable_entity
