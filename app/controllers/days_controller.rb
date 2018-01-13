@@ -4,11 +4,11 @@ class DaysController < ApplicationController
   def index
     @days = Day.all
 
-    render json: @days
+    render json: @days.as_json(include: [:combos, :events, :products])
   end
 
   def show
-    render json: @day
+    render json: @day.as_json(include: [:combos, :events, :products])
   end
 
   def create

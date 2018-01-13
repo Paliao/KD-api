@@ -4,11 +4,11 @@ class AdvertisesController < ApplicationController
   def index
     @advertises = Advertise.all
 
-    render json: @advertises
+    render json: @advertises.as_json(include: [:products, :combos, :ratings])
   end
 
   def show
-    render json: @advertise
+    render json: @advertise.as_json(include: [:products, :combos, :ratings])
   end
 
   def create

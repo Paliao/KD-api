@@ -4,11 +4,11 @@ class CombosController < ApplicationController
   def index
     @combos = Combo.all
 
-    render json: @combos
+    render json: @combos.as_json(include: [:events, :products])
   end
 
   def show
-    render json: @combo
+    render json: @combo.as_json(include: [:events, :products])
   end
 
   def create

@@ -41,13 +41,11 @@ ActiveRecord::Schema.define(version: 20180109055516) do
     t.float "rating", default: 0.0
     t.integer "rating_count", default: 0
     t.integer "category_id"
-    t.integer "combo_id"
     t.integer "day_id"
     t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_combos_on_category_id"
-    t.index ["combo_id"], name: "index_combos_on_combo_id"
     t.index ["day_id"], name: "index_combos_on_day_id"
     t.index ["establishment_id"], name: "index_combos_on_establishment_id"
   end
@@ -95,11 +93,13 @@ ActiveRecord::Schema.define(version: 20180109055516) do
     t.float "rating", default: 0.0
     t.integer "rating_count", default: 0
     t.integer "category_id"
+    t.integer "combo_id"
     t.integer "day_id"
     t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_events_on_category_id"
+    t.index ["combo_id"], name: "index_events_on_combo_id"
     t.index ["day_id"], name: "index_events_on_day_id"
     t.index ["establishment_id"], name: "index_events_on_establishment_id"
   end
