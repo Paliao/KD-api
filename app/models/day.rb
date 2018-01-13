@@ -8,7 +8,7 @@ class Day < ApplicationRecord
   has_many :menus, dependent: :delete_all
   has_many :products, through: :menus, dependent: :nullify
 
-  validates :day, inclusion: {
+  validates :name, inclusion: {
     in: %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday],
     message: '%<value>s is not a valid model'
   }

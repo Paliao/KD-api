@@ -2,7 +2,7 @@ class Advertise < ApplicationRecord
   belongs_to :category
   belongs_to :establishment
 
-  has_many :ratings, dependent: :destroy_all
+  has_many :ratings, dependent: :delete_all
   has_many :products, dependent: :nullify
   has_many :combos, dependent: :nullify
 

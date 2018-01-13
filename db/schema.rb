@@ -40,11 +40,13 @@ ActiveRecord::Schema.define(version: 20180109055516) do
     t.integer "price"
     t.float "rating", default: 0.0
     t.integer "rating_count", default: 0
+    t.integer "advertise_id"
     t.integer "category_id"
     t.integer "day_id"
     t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["advertise_id"], name: "index_combos_on_advertise_id"
     t.index ["category_id"], name: "index_combos_on_category_id"
     t.index ["day_id"], name: "index_combos_on_day_id"
     t.index ["establishment_id"], name: "index_combos_on_establishment_id"
@@ -60,10 +62,10 @@ ActiveRecord::Schema.define(version: 20180109055516) do
   end
 
   create_table "days", force: :cascade do |t|
-    t.string "day"
+    t.string "name"
     t.boolean "available", default: false
-    t.time "available_hour"
-    t.time "unavailable_hour"
+    t.datetime "available_hour"
+    t.datetime "unavailable_hour"
     t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
