@@ -4,7 +4,7 @@ class CreateAdvertises < ActiveRecord::Migration[5.1]
       t.string :name
       t.integer :price
       t.float :rating
-      t.boolean :disponibility
+      t.boolean :disponibility, default: true
       t.string :description
       t.float :rating, default: 0.0
       t.integer :rating_count, default: 0

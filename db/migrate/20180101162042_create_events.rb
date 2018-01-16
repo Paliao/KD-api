@@ -1,6 +1,7 @@
 class CreateEvents < ActiveRecord::Migration[5.1]
   def change
     create_table :events do |t|
+      t.string :name
       t.string :description
       t.integer :price, default: 0
       t.float :rating, default: 0.0

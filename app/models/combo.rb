@@ -9,6 +9,8 @@ class Combo < ApplicationRecord
   has_many :products, through: :menus, dependent: :nullify
   has_many :ratings, dependent: :delete_all
 
+  validates :name, length: { minimum: 10, maximum: 50 }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :rating, numericality: { greater_than_or_equal_to: 0 }
   validates :rating_count, numericality: { greater_than_or_equal_to: 0 }
 end
