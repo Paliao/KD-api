@@ -14,7 +14,7 @@ class RatingsController < ApplicationController
 
   def create
     @rating = Rating.new(rating_params)
-
+    Rating.setting_owner(@rating)
     if @rating.save
       render json: @rating, status: :created, location: @rating
     else
@@ -55,7 +55,8 @@ class RatingsController < ApplicationController
 
   def rating_params
     params.require(:rating).permit(
-      :avaliation, :advertise_id, :combo_id,
+      :avaliation, :description,
+      :advertise_id, :combo_id,
       :establishment_id, :event_id, :product_id
     )
   end

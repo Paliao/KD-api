@@ -152,6 +152,9 @@ ActiveRecord::Schema.define(version: 20180109055516) do
 
   create_table "ratings", force: :cascade do |t|
     t.integer "avaliation"
+    t.string "description"
+    t.string "owner"
+    t.integer "owner_id"
     t.integer "advertise_id"
     t.integer "product_id"
     t.integer "combo_id"

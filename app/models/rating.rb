@@ -40,4 +40,10 @@ class Rating < ApplicationRecord
     model.rating = aggregated
     model.save!
   end
+
+  def self.setting_owner(model)
+    owner = (model.advertise || model.combo || model.event || model.product || model.establishment)
+    model.owner = owner.class.to_s
+    model.owner_id = owner.id
+  end
 end

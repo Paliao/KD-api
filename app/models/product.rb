@@ -7,6 +7,7 @@ class Product < ApplicationRecord
   has_many :menus, dependent: :delete_all
   has_many :days, through: :menus, dependent: :nullify
   has_many :combos, through: :menus, dependent: :nullify
+  has_many :ratings, dependent: :delete_all
 
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
