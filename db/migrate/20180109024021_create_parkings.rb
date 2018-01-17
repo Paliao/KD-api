@@ -4,7 +4,7 @@ class CreateParkings < ActiveRecord::Migration[5.1]
       t.integer :quantity
       t.time :open_hour
       t.time :closure_hour
-      t.integer :hour_price
+      t.integer :hour_price_cents
       t.boolean :free
       t.belongs_to :establishment, index: { unique: true }, foreign_key: true
 

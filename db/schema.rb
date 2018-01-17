@@ -14,9 +14,9 @@ ActiveRecord::Schema.define(version: 20180109055516) do
 
   create_table "advertises", force: :cascade do |t|
     t.string "name"
-    t.integer "price"
+    t.integer "price_cents"
     t.float "rating", default: 0.0
-    t.boolean "disponibility"
+    t.boolean "disponibility", default: true
     t.string "description"
     t.integer "rating_count", default: 0
     t.integer "category_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20180109055516) do
 
   create_table "combos", force: :cascade do |t|
     t.string "name"
-    t.integer "price"
+    t.integer "price_cents"
     t.float "rating", default: 0.0
     t.integer "rating_count", default: 0
     t.integer "advertise_id"
@@ -90,8 +90,9 @@ ActiveRecord::Schema.define(version: 20180109055516) do
   end
 
   create_table "events", force: :cascade do |t|
+    t.string "name"
     t.string "description"
-    t.integer "price", default: 0
+    t.integer "price_cents", default: 0
     t.float "rating", default: 0.0
     t.integer "rating_count", default: 0
     t.integer "category_id"
@@ -121,7 +122,7 @@ ActiveRecord::Schema.define(version: 20180109055516) do
     t.integer "quantity"
     t.time "open_hour"
     t.time "closure_hour"
-    t.integer "hour_price"
+    t.integer "hour_price_cents"
     t.boolean "free"
     t.integer "establishment_id"
     t.datetime "created_at", null: false
@@ -131,7 +132,7 @@ ActiveRecord::Schema.define(version: 20180109055516) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.integer "price", default: 0
+    t.integer "price_cents", default: 0
     t.string "description"
     t.integer "quantity", default: 0
     t.float "rating", default: 0.0

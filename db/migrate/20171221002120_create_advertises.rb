@@ -2,7 +2,7 @@ class CreateAdvertises < ActiveRecord::Migration[5.1]
   def change
     create_table :advertises do |t|
       t.string :name
-      t.integer :price
+      t.integer :price_cents
       t.float :rating
       t.boolean :disponibility, default: true
       t.string :description
