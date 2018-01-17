@@ -4,11 +4,11 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
 
-    render json: @products.as_json(include: [:days, :combos])
+    render json: @products.as_json(include: [:days, :combos, :ratings])
   end
 
   def show
-    render json: @product.as_json(include: [:days, :combos])
+    render json: @product.as_json(include: [:days, :combos, :ratings])
   end
 
   def create

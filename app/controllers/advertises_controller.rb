@@ -43,7 +43,7 @@ class AdvertisesController < ApplicationController
     params.require(:advertise).permit(
       :name, :price, :disponibility, :description,
       :category_id, :establishment_id,
-      product_ids: [], combos: []
+      product_ids: [], combo_ids: []
     )
   end
 end
