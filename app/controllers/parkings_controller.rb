@@ -4,11 +4,11 @@ class ParkingsController < ApplicationController
   def index
     @parkings = Parking.all
 
-    render json: @parkings
+    render json: @parkings.as_json(include: [:ratings])
   end
 
   def show
-    render json: @parking
+    render json: @parking.as_json(include: [:ratings])
   end
 
   def create

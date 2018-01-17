@@ -57,7 +57,8 @@ class RatingsController < ApplicationController
     params.require(:rating).permit(
       :avaliation, :description,
       :advertise_id, :combo_id,
-      :establishment_id, :event_id, :product_id
+      :establishment_id, :event_id,
+      :parking_id, :product_id
     )
   end
 end

@@ -4,6 +4,7 @@ class Rating < ApplicationRecord
   belongs_to :establishment
   belongs_to :event, optional: true
   belongs_to :product, optional: true
+  belongs_to :parking, optional: true
 
   validates :avaliation, numericality: {
     less_than_or_equal_to: 10, greater_than_or_equal_to: 0
@@ -16,6 +17,8 @@ class Rating < ApplicationRecord
       Combo.find(rating.combo_id)
     elsif rating.event_id
       Event.find(rating.event_id)
+    elsif rating.parking
+      Parking.find(rating.parking_id)
     elsif rating.product_id
       Product.find(rating.product_id)
     else
@@ -42,7 +45,7 @@ class Rating < ApplicationRecord
   end
 
   def self.setting_owner(model)
-    owner = (model.advertise || model.combo || model.event || model.product || model.establishment)
+    owner = (model.advertise || model.combo || model.event || model.parking || model.product || model.establishment)
     model.owner = owner.class.to_s
     model.owner_id = owner.id
   end
