@@ -9,8 +9,10 @@ class Product < ApplicationRecord
   has_many :combos, through: :menus, dependent: :nullify
   has_many :ratings, dependent: :delete_all
 
-  validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
+  validates :price_cents, numericality: { greater_than_or_equal_to: 0 }
   validates :rating, numericality: { greater_than_or_equal_to: 0 }
   validates :rating_count, numericality: { greater_than_or_equal_to: 0 }
+
+  monetize :price_cents
 end
