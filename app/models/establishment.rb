@@ -9,6 +9,7 @@ class Establishment < ApplicationRecord
   has_many :products, dependent: :delete_all
   has_many :ratings, dependent: :delete_all
 
+  has_many :owners, dependent: :delete_all
   has_many :users, through: :owners, dependent: :nullify
 
   validates :name, :street, :number, presence: true

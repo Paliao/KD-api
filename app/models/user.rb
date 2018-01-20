@@ -5,6 +5,7 @@ class User < ApplicationRecord
   
   include DeviseTokenAuth::Concerns::User
 
+  has_many :owners, dependent: :delete_all
   has_many :establishments, through: :owners, dependent: :nullify
 
 end

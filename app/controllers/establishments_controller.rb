@@ -1,5 +1,6 @@
 class EstablishmentsController < ApplicationController
   before_action :set_establishment, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   def index
     @establishments = Establishment.all
@@ -13,6 +14,7 @@ class EstablishmentsController < ApplicationController
 
   def create
     @establishment = Establishment.new(establishment_params)
+    @establishment.users << current_user
 
     if @establishment.save && Category.category_checker(@establishment, 'Establishment')
       render json: @establishment, status: :created, location: @establishment
@@ -43,7 +45,7 @@ class EstablishmentsController < ApplicationController
     params.require(:establishment).permit(
       :name, :street, :number, :complement, :latitude, :longitude,
       :area, :capacity, :parking_lot,
-      :category_id
+      :category_id, user_ids: []
     )
   end
 end
