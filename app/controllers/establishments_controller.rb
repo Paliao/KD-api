@@ -24,6 +24,8 @@ class EstablishmentsController < ApplicationController
   end
 
   def update
+    @establishment.users << current_user unless @establishment.users.include?(current_user)
+
     if @establishment.update(establishment_params) && Category.category_checker(@establishment, 'Establishment')
       render json: @establishment
     else
