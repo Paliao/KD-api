@@ -15,9 +15,21 @@ class InvitesController < ApplicationController
   def create
     @invite = Invite.new(invite_params)
 
-    if possible_establishments.include?(params[:invite][:establishment_id])
+    if check_establishment_permission(params[:invite][:establishment_id])
       if @invite.save
         render json: @invite, status: :created, location: @invite
+      else
+        render json: @invite.errors, status: :unprocessable_entity
+      end
+    else
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden      
+    end
+  end
+
+  def update
+    if check_establishment_permission(params[:invite][:establishment_id]) || check_user_permission
+      if @invite.update(invite_params)
+        render json: @invite
       else
         render json: @invite.errors, status: :unprocessable_entity
       end
@@ -26,16 +38,12 @@ class InvitesController < ApplicationController
     end
   end
 
-  def update
-    if @invite.update(invite_params)
-      render json: @invite
-    else
-      render json: @invite.errors, status: :unprocessable_entity
-    end
-  end
-
   def destroy
-    @invite.destroy
+    if check_establishment_permission(params[:id])
+      @invite.destroy
+    else
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
+    end
   end
 
   private
@@ -48,8 +56,16 @@ class InvitesController < ApplicationController
     establishment_ids
   end
 
+  def check_establishment_permission(checker)
+    possible_establishments.include?(checker.to_i)
+  end
+
+  def check_user_permission
+    params[:invite][:user_id] ==  current_user.id
+  end
+
   def set_invite
-    if possible_establishments.include?(params[:id])
+    if check_establishment_permission(params[:id])
       @invite = Invite.find(params[:id])
     else
       render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
