@@ -2,10 +2,10 @@ class InvitesController < ApplicationController
   before_action :set_invite, only: [:show, :update, :destroy]
   before_action :authenticate_user!
 
-  def index
+  def index_establishment
     @invites = Invite.possible_invites(possible_establishments)
 
-    render json: @invites
+    render json: @invites, include: [:establishments]
   end
 
   def show
@@ -49,16 +49,16 @@ class InvitesController < ApplicationController
   end
 
   def set_invite
-    if possible_establishment.include?(params[:id])
+    if possible_establishments.include?(params[:id])
       @invite = Invite.find(params[:id])
     else
-      @invite.errors << ['You does not have the permission to do this']
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def invite_params
     params.require(:invite).permit(
-      :description,
+      :description, :accepted,
       :establishment_id, :user_id
     )
   end
