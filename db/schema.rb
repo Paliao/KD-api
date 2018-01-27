@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120022728) do
+ActiveRecord::Schema.define(version: 20180127060903) do
 
   create_table "advertises", force: :cascade do |t|
     t.string "name"
@@ -105,6 +105,17 @@ ActiveRecord::Schema.define(version: 20180120022728) do
     t.index ["combo_id"], name: "index_events_on_combo_id"
     t.index ["day_id"], name: "index_events_on_day_id"
     t.index ["establishment_id"], name: "index_events_on_establishment_id"
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.string "description"
+    t.boolean "accepted"
+    t.integer "establishment_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["establishment_id"], name: "index_invites_on_establishment_id"
+    t.index ["user_id"], name: "index_invites_on_user_id"
   end
 
   create_table "menus", force: :cascade do |t|

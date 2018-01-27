@@ -3,7 +3,7 @@ class InvitesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @invites = Invite.all
+    @invites = Invite.possible_invites(possible_establishments)
 
     render json: @invites
   end
@@ -15,7 +15,7 @@ class InvitesController < ApplicationController
   def create
     @invite = Invite.new(invite_params)
 
-    if @invite.save
+    if @invite.save 
       render json: @invite, status: :created, location: @invite
     else
       render json: @invite.errors, status: :unprocessable_entity
@@ -36,14 +36,22 @@ class InvitesController < ApplicationController
 
   private
 
+  def possible_establishments
+    owner_relations = Owner.is_owner?(current_member)
+    establishments = []
+    owner_relations.each { |relation| establishments << relation.establishment }
+
+    establishments
+  end
+
   def set_invite
     @invite = Invite.find(params[:id])
   end
 
   def invite_params
     params.require(:invite).permit(
-      :description, :accepted, :from, :to,
-      :establishment_id
+      :description,
+      :establishment_id, :user_id
     )
   end
 end

@@ -4,4 +4,6 @@ class Owner < ApplicationRecord
 
   belongs_to :user
   belongs_to :establishment
+
+  scope :is_owner?, ->(owner) { where(user: owner) }
 end
