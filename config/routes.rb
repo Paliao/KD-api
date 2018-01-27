@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :invites
   resources :advertises
   resources :categories
   resources :combos
