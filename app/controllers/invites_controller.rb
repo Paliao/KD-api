@@ -15,10 +15,14 @@ class InvitesController < ApplicationController
   def create
     @invite = Invite.new(invite_params)
 
-    if @invite.save 
-      render json: @invite, status: :created, location: @invite
+    if possible_establishments.include?(params[:invite][:establishment_id])
+      if @invite.save
+        render json: @invite, status: :created, location: @invite
+      else
+        render json: @invite.errors, status: :unprocessable_entity
+      end
     else
-      render json: @invite.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
@@ -37,15 +41,19 @@ class InvitesController < ApplicationController
   private
 
   def possible_establishments
-    owner_relations = Owner.is_owner?(current_member)
-    establishments = []
-    owner_relations.each { |relation| establishments << relation.establishment }
+    owner_relations = Owner.is_owner?(current_user)
+    establishment_ids = []
+    owner_relations.each { |relation| establishment_ids << relation.establishment_id }
 
-    establishments
+    establishment_ids
   end
 
   def set_invite
-    @invite = Invite.find(params[:id])
+    if possible_establishment.include?(params[:id])
+      @invite = Invite.find(params[:id])
+    else
+      @invite.errors << ['You does not have the permission to do this']
+    end
   end
 
   def invite_params
