@@ -26,12 +26,27 @@ class InvitesController < ApplicationController
     end
   end
 
+  # def update
+  #   if permission?
+  #     if @invite.update(invite_params)
+  #       render json: @invite
+  #     else
+  #       render json: @invite.errors, status: :unprocessable_entity
+  #     end
+  #   else
+  #     render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
+  #   end
+  # end
+
   def update
     if permission?
-      if @invite.update(invite_params)
-        render json: @invite
+      case params[:invite][:type]
+      when 'STAFF'
+        handle_staff
+      when 'FRIEND'
+        handle_friend
       else
-        render json: @invite.errors, status: :unprocessable_entity
+        render json: { error: 'You have not informed the type of the invite' }, status: :bad_request
       end
     else
       render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
@@ -48,6 +63,14 @@ class InvitesController < ApplicationController
 
   private
 
+  def permission?
+    check_establishment_permission(params[:invite][:establishment_id]) || check_sender
+  end
+
+  def check_establishment_permission(checker)
+    possible_establishments.include?(checker.to_i)
+  end
+
   def possible_establishments
     owner_relations = Owner.is_owner?(current_user)
     establishment_ids = []
@@ -56,25 +79,12 @@ class InvitesController < ApplicationController
     establishment_ids
   end
 
-  def check_establishment_permission(checker)
-    possible_establishments.include?(checker.to_i)
-  end
-
   def check_sender
     params[:invite][:user_id] == current_user.id
   end
 
-  # def alerady_in(establishment_id, user_id)
-  #   establishment = Establishment.find(establishment_id)
-  #   establishment.user_ids.exclude?(user_id)
-  # end
-
-  def permission?
-    check_establishment_permission(params[:invite][:establishment_id]) || check_sender
-  end
-
   def set_invite
-    if check_establishment_permission(params[:id])
+    if check_establishment_permission(params[:id]) || check_sender
       @invite = Invite.find(params[:id])
     else
       render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
@@ -83,7 +93,7 @@ class InvitesController < ApplicationController
 
   def invite_params
     params.require(:invite).permit(
-      :description, :accepted, :type
+      :description, :accepted, :type,
       :establishment_id, :user_id
     )
   end

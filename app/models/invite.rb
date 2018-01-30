@@ -15,4 +15,9 @@ class Invite < ApplicationRecord
   def init
     self.accepted = nil
   end
+
+  def self.alerady_in(establishment_id, user_id)
+    establishment = Establishment.find(establishment_id)
+    establishment.user_ids.exclude?(user_id)
+  end
 end
