@@ -9,7 +9,7 @@ class InvitesController < ApplicationController
   end
 
   def show
-    render json: @invite
+    render json: @invite, include: [:establishments]
   end
 
   def create
@@ -27,7 +27,7 @@ class InvitesController < ApplicationController
   end
 
   def update
-    if permission? 
+    if permission?
       if @invite.update(invite_params)
         render json: @invite
       else
@@ -83,7 +83,7 @@ class InvitesController < ApplicationController
 
   def invite_params
     params.require(:invite).permit(
-      :description, :accepted,
+      :description, :accepted, :type
       :establishment_id, :user_id
     )
   end
