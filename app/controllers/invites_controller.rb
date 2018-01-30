@@ -22,12 +22,12 @@ class InvitesController < ApplicationController
         render json: @invite.errors, status: :unprocessable_entity
       end
     else
-      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden      
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def update
-    if check_establishment_permission(params[:invite][:establishment_id]) || check_user_permission
+    if permission? 
       if @invite.update(invite_params)
         render json: @invite
       else
@@ -60,8 +60,17 @@ class InvitesController < ApplicationController
     possible_establishments.include?(checker.to_i)
   end
 
-  def check_user_permission
-    params[:invite][:user_id] ==  current_user.id
+  def check_sender
+    params[:invite][:user_id] == current_user.id
+  end
+
+  # def alerady_in(establishment_id, user_id)
+  #   establishment = Establishment.find(establishment_id)
+  #   establishment.user_ids.exclude?(user_id)
+  # end
+
+  def permission?
+    check_establishment_permission(params[:invite][:establishment_id]) || check_sender
   end
 
   def set_invite
