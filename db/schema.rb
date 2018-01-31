@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 20180127060903) do
   create_table "invites", force: :cascade do |t|
     t.string "description"
     t.boolean "accepted"
-    t.string "type"
+    t.string "invite_type"
     t.integer "establishment_id"
     t.integer "user_id"
     t.datetime "created_at", null: false

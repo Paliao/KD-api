@@ -17,4 +17,8 @@ class Establishment < ApplicationRecord
   validates :capacity, numericality: { greater_than_or_equal_to: 0 }
   validates :rating, numericality: { greater_than_or_equal_to: 0 }
   validates :rating_count, numericality: { greater_than_or_equal_to: 0 }
+
+  def self.already_in?(establishment, user_id)
+    establishment.user_ids.exclude?(user_id)
+  end
 end
