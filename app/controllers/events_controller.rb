@@ -14,24 +14,41 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
+    establishment_id = @event.establishment_id
 
-    if @event.save && Category.category_checker(@event, 'Event')
-      render json: @event, status: :created, location: @event
+    if Establishment.staff?(establishment_id, current_user)
+      if Category.category_checker(@event, 'Event') && @event.save
+        render json: @event, status: :created, location: @event
+      else
+        render json: @event.errors, status: :unprocessable_entity
+      end
     else
-      render json: @event.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def update
-    if @event.update(event_params) && Category.category_checker(@event, 'Event')
-      render json: @event
+    establishment_id = @event.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      if Category.category_checker(@event, 'Event') && @event.update(event_params)
+        render json: @event
+      else
+        render json: @event.errors, status: :unprocessable_entity
+      end
     else
-      render json: @event.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def destroy
-    @event.destroy
+    establishment_id = @event.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      @event.destroy
+    else
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
+    end
   end
 
   private

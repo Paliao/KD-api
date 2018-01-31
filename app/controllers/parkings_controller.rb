@@ -14,24 +14,41 @@ class ParkingsController < ApplicationController
 
   def create
     @parking = Parking.new(parking_params)
+    establishment_id = @parking.establishment_id
 
-    if @parking.save
-      render json: @parking, status: :created, location: @parking
+    if Establishment.staff?(establishment_id, current_user)
+      if @parking.save
+        render json: @parking, status: :created, location: @parking
+      else
+        render json: @parking.errors, status: :unprocessable_entity
+      end
     else
-      render json: @parking.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def update
-    if @parking.update(parking_params)
-      render json: @parking
+    establishment_id = @parking.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      if @parking.update(parking_params)
+        render json: @parking
+      else
+        render json: @parking.errors, status: :unprocessable_entity
+      end
     else
-      render json: @parking.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def destroy
-    @parking.destroy
+    establishment_id = @parking.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      @parking.destroy
+    else
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
+    end
   end
 
   private

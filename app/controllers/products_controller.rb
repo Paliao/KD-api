@@ -14,24 +14,41 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    establishment_id = @product.establishment_id
 
-    if @product.save && Category.category_checker(@product, 'Product')
-      render json: @product, status: :created, location: @product
+    if Establishment.staff?(establishment_id, current_user)
+      if Category.category_checker(@product, 'Product') && @product.save
+        render json: @product, status: :created, location: @product
+      else
+        render json: @product.errors, status: :unprocessable_entity
+      end
     else
-      render json: @product.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def update
-    if @product.update(product_params) && Category.category_checker(@product, 'Product')
-      render json: @product
+    establishment_id = @product.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      if Category.category_checker(@product, 'Product') && @product.update(product_params)
+        render json: @product
+      else
+        render json: @product.errors, status: :unprocessable_entity
+      end
     else
-      render json: @product.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def destroy
-    @product.destroy
+    establishment_id = @product.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      @product.destroy
+    else
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
+    end
   end
 
   private
