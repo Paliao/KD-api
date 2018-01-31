@@ -14,24 +14,41 @@ class AdvertisesController < ApplicationController
 
   def create
     @advertise = Advertise.new(advertise_params)
+    establishment_id = @advertise.establishment_id
 
-    if @advertise.save && Category.category_checker(@advertise, 'Advertise')
-      render json: @advertise, status: :created, location: @advertise
+    if Establishment.staff?(establishment_id, current_user)
+      if Category.category_checker(@advertise, 'Advertise') && @advertise.save
+        render json: @advertise, status: :created, location: @advertise
+      else
+        render json: @advertise.errors, status: :unprocessable_entity
+      end
     else
-      render json: @advertise.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def update
-    if @advertise.update(advertise_params) && Category.category_checker(@advertise, 'Advertise')
-      render json: @advertise
+    establishment_id = @advertise.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      if Category.category_checker(@advertise, 'Advertise') && @advertise.update(advertise_params)
+        render json: @advertise
+      else
+        render json: @advertise.errors, status: :unprocessable_entity
+      end
     else
-      render json: @advertise.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def destroy
-    @advertise.destroy
+    establishment_id = @advertise.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      @advertise.destroy
+    else
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
+    end
   end
 
   private

@@ -14,24 +14,41 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
+    establishment_id = @contact.establishment_id
 
-    if @contact.save
-      render json: @contact, status: :created, location: @contact
+    if Establishment.staff?(establishment_id, current_user)
+      if @contact.save
+        render json: @contact, status: :created, location: @contact
+      else
+        render json: @contact.errors, status: :unprocessable_entity
+      end
     else
-      render json: @contact.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def update
-    if @contact.update(contact_params)
-      render json: @contact
+    establishment_id = @contact.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      if @contact.update(contact_params)
+        render json: @contact
+      else
+        render json: @contact.errors, status: :unprocessable_entity
+      end
     else
-      render json: @contact.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def destroy
-    @contact.destroy
+    establishment_id = @contact.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      @contact.destroy
+    else
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
+    end
   end
 
   private

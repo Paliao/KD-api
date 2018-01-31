@@ -43,6 +43,7 @@ class DaysController < ApplicationController
 
   def destroy
     establishment_id = @day.establishment_id
+
     if Establishment.staff?(establishment_id, current_user)
       @day.destroy
     else
