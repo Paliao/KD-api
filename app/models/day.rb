@@ -1,7 +1,7 @@
 class Day < ApplicationRecord
   after_initialize :init
 
-  belongs_to :establishment, optional: true
+  belongs_to :establishment
 
   has_many :combos, dependent: :nullify
   has_many :events, dependent: :delete_all

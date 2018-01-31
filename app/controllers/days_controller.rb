@@ -14,24 +14,40 @@ class DaysController < ApplicationController
 
   def create
     @day = Day.new(day_params)
+    establishment_id = @day.establishment_id
 
-    if @day.save
-      render json: @day, status: :created, location: @day
+    if Establishment.staff?(establishment_id, current_user)
+      if @day.save
+        render json: @day, status: :created, location: @day
+      else
+        render json: @day.errors, status: :unprocessable_entity
+      end
     else
-      render json: @day.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def update
-    if @day.update(day_params)
-      render json: @day
+    establishment_id = @day.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      if @day.update(day_params)
+        render json: @day
+      else
+        render json: @day.errors, status: :unprocessable_entity
+      end
     else
-      render json: @day.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def destroy
-    @day.destroy
+    establishment_id = @day.establishment_id
+    if Establishment.staff?(establishment_id, current_user)
+      @day.destroy
+    else
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
+    end
   end
 
   private

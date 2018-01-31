@@ -21,4 +21,10 @@ class Establishment < ApplicationRecord
   def self.already_in?(establishment, user_id)
     establishment.user_ids.exclude?(user_id)
   end
+
+  def self.staff?(establishment_id, user)
+    user_id = user.id
+    establishment = Establishment.find(establishment_id)
+    establishment.user_ids.include?(user_id)
+  end
 end
