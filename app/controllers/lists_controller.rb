@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   def index
     @lists = List.all
@@ -34,11 +35,17 @@ class ListsController < ApplicationController
   end
 
   private
-    def set_list
-      @list = List.find(params[:id])
-    end
 
-    def list_params
-      params.require(:list).permit(:per_users, :discount, :fixed_value, :combo_id, :establishment_id, :events_id, :product_id)
-    end
+  def set_list
+    @list = List.find(params[:id])
+  end
+
+  def list_params
+    params.require(:list).permit(
+      :name, :per_users, :discount, :fixed_value,
+      :opening, :expiration,
+      :combo_id, :establishment_id,
+      :events_id, :product_id
+    )
+  end
 end

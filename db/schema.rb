@@ -120,9 +120,15 @@ ActiveRecord::Schema.define(version: 20180202001905) do
   end
 
   create_table "lists", force: :cascade do |t|
+    t.integer "current_value"
     t.float "discount", default: 0.0
-    t.integer "per_users"
+    t.datetime "opening"
+    t.datetime "expiration"
+    t.boolean "expired"
     t.float "fixed_value"
+    t.integer "initial_value"
+    t.string "name"
+    t.integer "per_users"
     t.integer "combo_id"
     t.integer "establishment_id"
     t.integer "events_id"
