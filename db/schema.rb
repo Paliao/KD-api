@@ -129,16 +129,12 @@ ActiveRecord::Schema.define(version: 20180202001905) do
     t.integer "initial_value"
     t.string "name"
     t.integer "per_users"
-    t.integer "combo_id"
     t.integer "establishment_id"
-    t.integer "events_id"
-    t.integer "product_id"
+    t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["combo_id"], name: "index_lists_on_combo_id"
     t.index ["establishment_id"], name: "index_lists_on_establishment_id"
-    t.index ["events_id"], name: "index_lists_on_events_id"
-    t.index ["product_id"], name: "index_lists_on_product_id"
+    t.index ["event_id"], name: "index_lists_on_event_id"
   end
 
   create_table "menus", force: :cascade do |t|

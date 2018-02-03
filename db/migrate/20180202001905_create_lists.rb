@@ -10,10 +10,8 @@ class CreateLists < ActiveRecord::Migration[5.1]
       t.integer :initial_value
       t.string :name
       t.integer :per_users
-      t.references :combo, foreign_key: true
       t.references :establishment, foreign_key: true
-      t.references :events, foreign_key: true
-      t.references :product, foreign_key: true
+      t.references :event, foreign_key: true
 
       t.timestamps
     end

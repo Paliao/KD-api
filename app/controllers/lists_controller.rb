@@ -36,6 +36,20 @@ class ListsController < ApplicationController
 
   private
 
+  def valid_event_time
+    event_id = @list.event_id
+    event = Event.find(event_id)
+    event_day = event.day
+    available_hour = event_day.available_hour
+    unavailable_hour = event_day.unavailable_hour
+    valid?(@list, available_hour, unavailable_hour)
+  end
+
+  def valid?(list, available_hour, unavailable_hour)
+    List.valid_opening?(list, available_hour)
+    List.expired?(list, unavailable_hour)
+  end
+
   def set_list
     @list = List.find(params[:id])
   end
@@ -44,8 +58,7 @@ class ListsController < ApplicationController
     params.require(:list).permit(
       :name, :per_users, :discount, :fixed_value,
       :opening, :expiration,
-      :combo_id, :establishment_id,
-      :events_id, :product_id
+      :establishment_id, :events_id
     )
   end
 end
