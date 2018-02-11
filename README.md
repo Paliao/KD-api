@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project help people to find a good place to eat independent of the establishment rating.
+Only by the best searched product.
 
-Things you may want to cover:
+Things to run the app:
 
-* Ruby version
+* Ruby version: 2.4.1
 
-* System dependencies
+* Database: mySQL
 
-* Configuration
+* Database: Will be runned when you starts
 
-* Database creation
+* Tests will be implemented yet
 
-* Database initialization
+* Deployment isn't available yet 
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
