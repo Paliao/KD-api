@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(version: 20180202001905) do
     t.integer "event_id"
     t.integer "parking_id"
     t.integer "product_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["advertise_id"], name: "index_ratings_on_advertise_id"
@@ -209,6 +210,7 @@ ActiveRecord::Schema.define(version: 20180202001905) do
     t.index ["event_id"], name: "index_ratings_on_event_id"
     t.index ["parking_id"], name: "index_ratings_on_parking_id"
     t.index ["product_id"], name: "index_ratings_on_product_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

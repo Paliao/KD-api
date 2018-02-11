@@ -58,7 +58,8 @@ class RatingsController < ApplicationController
       :avaliation, :description,
       :advertise_id, :combo_id,
       :establishment_id, :event_id,
-      :parking_id, :product_id
+      :parking_id, :product_id,
+      :user_id
     )
   end
 end
