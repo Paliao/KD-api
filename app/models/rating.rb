@@ -11,8 +11,6 @@ class Rating < ApplicationRecord
     less_than_or_equal_to: 10, greater_than_or_equal_to: 0
   }
 
-  scope :already_rated, ->(avaliator_id) { where(user_id: avaliator_id) }
-
   def self.rating_model_chooser(rating)
     if rating.advertise_id
       Advertise.find(rating.advertise_id)
