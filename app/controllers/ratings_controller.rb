@@ -17,7 +17,7 @@ class RatingsController < ApplicationController
     @rating = Rating.new(rating_params)
     @rating.user_id = current_user.id
     Rating.setting_owner(@rating)
-    
+
     if @rating.save
       render json: @rating, status: :created, location: @rating
     else

@@ -4,11 +4,13 @@ class Establishment < ApplicationRecord
   has_many :advertises, dependent: :delete_all
   has_many :combos, dependent: :delete_all
   has_many :contacts, dependent: :delete_all
-  has_many :days, dependent: :delete_all
   has_many :events, dependent: :delete_all
   has_many :invites, dependent: :delete_all
   has_many :products, dependent: :delete_all
   has_many :ratings, dependent: :delete_all
+
+  has_many :days, through: :schedulings, dependent: :nullify
+  has_many :schedulings, dependent: :delete_all
 
   has_many :owners, dependent: :delete_all
   has_many :users, through: :owners, dependent: :nullify
