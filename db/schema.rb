@@ -66,10 +66,8 @@ ActiveRecord::Schema.define(version: 20180215075708) do
     t.boolean "available", default: false
     t.datetime "available_hour"
     t.datetime "unavailable_hour"
-    t.integer "establishment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["establishment_id"], name: "index_days_on_establishment_id"
   end
 
   create_table "establishments", force: :cascade do |t|
@@ -238,10 +236,13 @@ ActiveRecord::Schema.define(version: 20180215075708) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "name"
+    t.string "first_name"
     t.string "nickname"
     t.string "image"
     t.string "email"
+    t.string "last_name"
+    t.integer "cpf"
+    t.integer "rg"
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
