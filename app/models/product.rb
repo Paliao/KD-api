@@ -9,6 +9,9 @@ class Product < ApplicationRecord
   has_many :combos, through: :menus, dependent: :nullify
   has_many :ratings, dependent: :delete_all
 
+  has_many :carts, through: :chosed, dependent: :nullify
+  has_many :chosed, dependent: :delete_all
+
   validates :quantity, numericality: { greater_than_or_equal_to: 0 }
   validates :price_cents, numericality: { greater_than_or_equal_to: 0 }
   validates :rating, numericality: { greater_than_or_equal_to: 0 }
