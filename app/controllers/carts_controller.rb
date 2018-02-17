@@ -40,6 +40,9 @@ class CartsController < ApplicationController
   end
 
   def cart_params
-    params.require(:cart).permit(:price_aggregated, :count, :user_id)
+    params.require(:cart).permit(
+      :total, :count,
+      :user_id
+    )
   end
 end
