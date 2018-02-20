@@ -1,36 +1,25 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :update, :destroy]
-
-  def index
-    @carts = Cart.all
-
-    render json: @carts
-  end
+  before_action :set_cart, only: [:show, :update]
+  before_action :authenticate_user!
 
   def show
-    render json: @cart
-  end
-
-  def create
-    @cart = Cart.new(cart_params)
-
-    if @cart.save
-      render json: @cart, status: :created, location: @cart
+    if Cart.onwer?(current_user.id)
+      render json: @cart
     else
-      render json: @cart.errors, status: :unprocessable_entity
+      render json: { error: 'This cart does not belongs to you' }, status: :forbidden
     end
   end
 
   def update
-    if @cart.update(cart_params)
-      render json: @cart
+    if Cart.onwer?(current_user.id)
+      if @cart.update(cart_params)
+        render json: @cart
+      else
+        render json: @cart.errors, status: :unprocessable_entity
+      end
     else
-      render json: @cart.errors, status: :unprocessable_entity
+      render json: { error: 'This cart does not belongs to you' }, status: :forbidden
     end
-  end
-
-  def destroy
-    @cart.destroy
   end
 
   private
@@ -42,6 +31,7 @@ class CartsController < ApplicationController
   def cart_params
     params.require(:cart).permit(
       :total, :count,
+      combo_ids: [], product_ids: [],
       :user_id
     )
   end

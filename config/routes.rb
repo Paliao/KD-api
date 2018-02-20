@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  resources :carts
-  resources :lists
   resources :advertises
+  resources :carts, only: [:show, :update]
   resources :categories
-  resources :combos
   resources :contacts
+  resources :combos
   resources :days
   resources :establishments
   resources :events
   resources :invites, except: [:index]
+  resources :lists
   get 'invites_establishment', to: 'invites#index_establishment'
   resources :parkings
   resources :products

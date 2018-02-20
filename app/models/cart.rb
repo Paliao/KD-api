@@ -6,4 +6,6 @@ class Cart < ApplicationRecord
   validates_presence_of :user_id
   validates :count, numericality: { greater_than_or_equal_to: 0 }
   validates :total, numericality: { greater_than_or_equal_to: 0 }
+
+  scope :onwer?, -> (user) { where(user_id: user) }
 end
