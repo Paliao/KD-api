@@ -5,6 +5,7 @@ class Advertise < ApplicationRecord
   has_many :ratings, dependent: :delete_all
   has_many :products, dependent: :nullify
   has_many :combos, dependent: :nullify
+  has_many :galeries, dependent: :delete_all
 
   validates :name, presence: true
   validates :description, length: { minimum: 10, maximum: 500 }

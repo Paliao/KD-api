@@ -4,6 +4,7 @@ class Event < ApplicationRecord
   belongs_to :establishment
   belongs_to :combo, optional: true
 
+  has_many :galeries, dependent: :delete_all
   has_many :ratings, dependent: :delete_all
 
   validates :name, length: { minimum: 10, maximum: 50 }

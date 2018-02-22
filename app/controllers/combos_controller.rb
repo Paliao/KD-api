@@ -62,7 +62,8 @@ class CombosController < ApplicationController
       :name, :price,
       :category_id,
       :day_id, :establishment_id,
-      product_ids: [], event_ids: []
+      product_ids: [], event_ids: [],
+      galery_ids: []
     )
   end
 end

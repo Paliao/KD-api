@@ -5,6 +5,7 @@ class Establishment < ApplicationRecord
   has_many :combos, dependent: :delete_all
   has_many :contacts, dependent: :delete_all
   has_many :events, dependent: :delete_all
+  has_many :galeries, dependent: :delete_all
   has_many :invites, dependent: :delete_all
   has_many :products, dependent: :delete_all
   has_many :ratings, dependent: :delete_all

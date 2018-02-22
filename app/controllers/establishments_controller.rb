@@ -47,7 +47,8 @@ class EstablishmentsController < ApplicationController
     params.require(:establishment).permit(
       :name, :street, :number, :complement, :latitude, :longitude,
       :area, :capacity, :parking_lot,
-      :category_id, user_ids: []
+      :category_id,
+      user_ids: [], galery_ids: []
     )
   end
 end

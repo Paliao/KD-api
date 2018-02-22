@@ -2,6 +2,7 @@ class Parking < ApplicationRecord
   belongs_to :establishment
 
   has_many :ratings, dependent: :delete_all
+  has_many :galeries, dependent: :delete_all
 
   validates :quantity, :open_hour, :closure_hour, :hour_price, presence: true
   validates :hour_price_cents, numericality: { greater_than_or_equal_to: 0 }

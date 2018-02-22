@@ -9,6 +9,8 @@ class Combo < ApplicationRecord
   has_many :products, through: :menus, dependent: :nullify
   has_many :ratings, dependent: :delete_all
 
+  has_many :galeries, dependent: :delete_all
+
   has_many :carts, through: :chosed, dependent: :nullify
   has_many :chosed, dependent: :delete_all
 

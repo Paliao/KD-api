@@ -60,7 +60,8 @@ class ParkingsController < ApplicationController
   def parking_params
     params.require(:parking).permit(
       :quantity, :open_hour, :closure_hour, :hour_price,
-      :establishment_id
+      :establishment_id,
+      galery_ids: []
     )
   end
 end

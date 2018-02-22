@@ -62,7 +62,7 @@ class ProductsController < ApplicationController
       :name, :price, :description, :quantity,
       :category_id,
       :establishment_id, :combo_id, :event_id,
-      day_ids: []
+      day_ids: [], galery_ids: []
     )
   end
 end

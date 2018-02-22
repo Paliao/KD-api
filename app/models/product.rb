@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   has_many :days, through: :menus, dependent: :nullify
   has_many :combos, through: :menus, dependent: :nullify
   has_many :ratings, dependent: :delete_all
+  has_many :galeries, dependent: :delete_all
 
   has_many :carts, through: :chosed, dependent: :nullify
   has_many :chosed, dependent: :delete_all
