@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180217012452) do
+ActiveRecord::Schema.define(version: 20180221215119) do
 
   create_table "advertises", force: :cascade do |t|
     t.string "name"
@@ -123,6 +123,26 @@ ActiveRecord::Schema.define(version: 20180217012452) do
     t.index ["combo_id"], name: "index_events_on_combo_id"
     t.index ["day_id"], name: "index_events_on_day_id"
     t.index ["establishment_id"], name: "index_events_on_establishment_id"
+  end
+
+  create_table "galeries", force: :cascade do |t|
+    t.string "url"
+    t.string "type"
+    t.datetime "date"
+    t.integer "advertise_id"
+    t.integer "combo_id"
+    t.integer "establishment_id"
+    t.integer "event_id"
+    t.integer "parking_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["advertise_id"], name: "index_galeries_on_advertise_id"
+    t.index ["combo_id"], name: "index_galeries_on_combo_id"
+    t.index ["establishment_id"], name: "index_galeries_on_establishment_id"
+    t.index ["event_id"], name: "index_galeries_on_event_id"
+    t.index ["parking_id"], name: "index_galeries_on_parking_id"
+    t.index ["product_id"], name: "index_galeries_on_product_id"
   end
 
   create_table "invites", force: :cascade do |t|

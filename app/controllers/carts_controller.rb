@@ -31,8 +31,8 @@ class CartsController < ApplicationController
   def cart_params
     params.require(:cart).permit(
       :total, :count,
-      combo_ids: [], product_ids: [],
-      :user_id
+      :user_id,
+      combo_ids: [], product_ids: []
     )
   end
 end

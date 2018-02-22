@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :galeries
   resources :advertises
   resources :carts, only: [:show, :update]
   resources :categories

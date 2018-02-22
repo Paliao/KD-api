@@ -14,6 +14,6 @@ class User < ApplicationRecord
   has_many :ratings, dependent: :delete_all
 
   def init
-    Cart.create(user_id: id )
+    Cart.create(user_id: id)
   end
 end

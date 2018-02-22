@@ -3,9 +3,9 @@ class Cart < ApplicationRecord
   has_many :combos, through: :chosed, dependent: :nullify
   has_many :products, through: :chosed, dependent: :nullify
 
-  validates_presence_of :user_id
+  validates :user_id, presence: true
   validates :count, numericality: { greater_than_or_equal_to: 0 }
   validates :total, numericality: { greater_than_or_equal_to: 0 }
 
-  scope :onwer?, -> (user) { where(user_id: user) }
+  scope :onwer?, ->(user) { where(user_id: user) }
 end
