@@ -1,6 +1,6 @@
 class GaleriesController < ApplicationController
   before_action :set_galery, only: [:show, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @galeries = Galery.all
@@ -14,24 +14,41 @@ class GaleriesController < ApplicationController
 
   def create
     @galery = Galery.new(galery_params)
+    establishment_id = @galery.establishment_id
 
-    if @galery.save
-      render json: @galery, status: :created, location: @galery
+    if Establishment.staff?(establishment_id, current_user)
+      if @galery.save
+        render json: @galery, status: :created, location: @galery
+      else
+        render json: @galery.errors, status: :unprocessable_entity
+      end
     else
-      render json: @galery.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def update
-    if @galery.update(galery_params)
-      render json: @galery
+    establishment_id = @galery.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      if @galery.update(galery_params)
+        render json: @galery
+      else
+        render json: @galery.errors, status: :unprocessable_entity
+      end
     else
-      render json: @galery.errors, status: :unprocessable_entity
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
     end
   end
 
   def destroy
-    @galery.destroy
+    establishment_id = @galery.establishment_id
+
+    if Establishment.staff?(establishment_id, current_user)
+      @galery.destroy
+    else
+      render json: { error: 'You does not have permission to finish this action' }, status: :forbidden
+    end
   end
 
   private
