@@ -39,8 +39,8 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[5.1]
       t.string :image
       t.string :email
       t.string :last_name
-      t.integer :cpf
-      t.integer :rg
+      t.integer :cpf, limit: 11
+      t.integer :rg, limit: 9
 
       ## Tokens
       t.text :tokens

@@ -128,7 +128,6 @@ ActiveRecord::Schema.define(version: 20180221215119) do
   create_table "galeries", force: :cascade do |t|
     t.string "url"
     t.string "type"
-    t.datetime "date"
     t.integer "advertise_id"
     t.integer "combo_id"
     t.integer "establishment_id"
@@ -281,8 +280,8 @@ ActiveRecord::Schema.define(version: 20180221215119) do
     t.string "image"
     t.string "email"
     t.string "last_name"
-    t.integer "cpf"
-    t.integer "rg"
+    t.integer "cpf", limit: 11
+    t.integer "rg", limit: 9
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

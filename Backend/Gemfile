@@ -20,6 +20,7 @@ gem 'sqlite3'
 group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails'
+  gem 'ffaker'
 end
 
 group :development do
