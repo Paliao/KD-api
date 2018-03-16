@@ -1,15 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View } from 'react-native'
-import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
 
-
-import reducers from './src/reducers'
+import store from './src/config/store'
 import RootStack from './src/routes'
 
-const store = applyMiddleware(thunk)(createStore)(reducers)
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
       <Provider store={store}>

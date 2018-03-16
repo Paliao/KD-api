@@ -1,3 +1,5 @@
+# BACKEND
+
 Backend/.bundle
 
 Backend/db/*.sqlite3
@@ -10,4 +12,18 @@ Backend/tmp/.keep
 Backend/erd.pdf
 
 Backend/.byebug_history
-.env
+
+# FRONTEND
+Frontend/.env
+Frontend/.expo/
+
+Frontend/node_modules
+
+Frontend/.env.local
+Frontend/.env.development.local
+Frontend/.env.test.local
+Frontend/.env.production.local
+
+Frontend/npm-debug.log*
+Frontend/yarn-debug.log*
+Frontend/yarn-error.log*
