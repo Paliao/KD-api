@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { Provider } from 'react-redux'
 
 import store from './src/config/store'
-import RootStack from './src/routes'
+import RootStack from './src/config/routes'
 
 export default class App extends Component {
   render() {

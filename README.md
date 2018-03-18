@@ -3,7 +3,13 @@
 This project help people to find a good place to eat independent of the establishment rating.
 Only by the best searched product.
 
-Things to run the app:
+This project is made in Ruby and JavaScript with the following framework: 
+
+* Ruby on Rails
+
+* React native
+
+Things to the BACKEND run in this app:
 
 * Ruby version: 2.4.1
 
@@ -14,4 +20,3 @@ Things to run the app:
 * Tests will be implemented yet
 
 * Deployment isn't available yet 
-
